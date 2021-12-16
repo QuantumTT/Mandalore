@@ -207,9 +207,9 @@ try:
     with connect(
         host = 'localhost',
         port = '3306',
-        user = input('Username: '),
-        password = getpass('Password: '),
-        database = 'mandalore',
+        user = 'root',
+        password = 'u44bKWkJeEs%3S8b',
+        database = 'mandalore'
     ) as connection:
         with connection.cursor() as cursor:
             cursor.execute(dbb.db_build_query, multi = True)

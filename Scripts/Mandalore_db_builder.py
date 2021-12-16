@@ -6,23 +6,28 @@ from mysql.connector import connect, Error
 code_file = open('Mandalore_source_code.txt', 'r')
 db_build_query = ''
 for line in code_file:
-    db_build_query += line 
+    db_build_query += line
 
-if __name__ == '__main__':
-    try:
-        with connect(
-            host = 'localhost',
-            port = '3306',
-            user = input('Username: '),
-            password = getpass('Password: '),
-        ) as connection:
-            with connection.cursor() as cursor:
-                cursor.execute(db_build_query, multi = True)
-                connection.commit()
-                print('Success!')
+try:
+    with connect(
+        host = 'localhost',
+        port = '3306',
+        user = 'root',
+        password = 'u44bKWkJeEs%3S8b'
+    ) as connection:
+        with connection.cursor() as cursor:
+            iterator = cursor.execute(db_build_query, params=None, multi=True)
+            for line in iterator:
+                pass
+            connection.commit()
+            cursor.execute("show databases")
+            results = cursor.fetchall()
+            for row in results:
+                print(row)
+            print('Successfully created schema "mandalore"')
 
-    except Error as e:
-        print(e)
+except Error as e:
+    print(e)
 
 
 # Close all the files
